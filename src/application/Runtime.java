@@ -196,8 +196,21 @@ public class Runtime {
         args = args != null? args : new String[] { };
         status = StartUpStatus.starting;
         log.info(String.format("------------ starting: %s", this.getClass().getName()));
-        // String classpath = System.getProperty("java.class.path");
+        //
+        // VSCode returns proper getenv("CLASSPATH"), but strange
+        // eclipse content for getProperty("java.class.path") when
+        // JUnit tests execute in VSCode (prefer getenv("CLASSPATH"))
         String classpath = System.getenv("CLASSPATH");
+        if(classpath==null || classpath.length()==0) {
+            log.warn("CLASSPATH is not set (trying to get from \"java.class.path\" property)");
+            classpath = System.getProperty("java.class.path");
+            if(classpath==null || classpath.length()==0) {
+                log.error(String.format("empty CLASSPATH or \"java.class.path\": %s",
+                    classpath==null? "(null)" : "\"" + classpath + "\""));
+                log.error("class scan cannot be performed");
+                classpath = "";
+            }
+        }
         String[] classpathEntries = classpath.split(System.getProperty("path.separator"));
         boolean resourcesFromJar = classpathEntries.length==1;
 
