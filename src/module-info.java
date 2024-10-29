@@ -12,11 +12,12 @@
  * @author <code style=color:blue>{@value application.package_info#Author}</code>
  */
 module se1.play {
-    opens application;     // open: package is accessible by JavaVM at runtime
-    exports application;   // export: package is accessible to compile other modules
+    opens application;
+    exports application;                // export application package to enable Javadoc
+    exports streams;                    // export numbers package to enable Javadoc
 
-    requires org.junit.jupiter.api;     // JUnit-5 module for JUnit testing
-    requires transitive org.slf4j;      // slf4j/log4j2 logging modules
+    requires org.junit.jupiter.api;         // JUnit-5 module required for testing
+    requires transitive org.slf4j;          // slf4j/log4j2 logging modules
     requires org.apache.logging.log4j.core;
     requires org.apache.logging.log4j;
 }
