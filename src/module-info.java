@@ -14,9 +14,10 @@
 module se1.play {
     opens application;
     exports application;                // export application package to enable Javadoc
+    exports numbers;                    // export numbers package to enable Javadoc
 
-    requires org.junit.jupiter.api;             // JUnit-5 module required for testing
-    requires transitive org.slf4j;              // slf4j/log4j2 logging modules
+    requires org.junit.jupiter.api;         // JUnit-5 module required for testing
+    requires transitive org.slf4j;          // slf4j/log4j2 logging modules
     requires org.apache.logging.log4j.core;
     requires org.apache.logging.log4j;
 }
