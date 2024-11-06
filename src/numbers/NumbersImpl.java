@@ -104,7 +104,13 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
      */
     @Override
     public int sum_recursive(int[] numbers, int i) {
-        return 0;
+        if(numbers.length == 1) {
+            return numbers[0];
+        }
+        
+        else {
+            return numbers[i] + sum_recursive(numbers, i - 1);
+        }
     }
 
     /**
