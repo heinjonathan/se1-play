@@ -73,7 +73,7 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
         int sum = 0;
         
         for(int i = 0; i < numbers.length; i++) {
-            sum = sum + numbers[i];
+            sum += numbers[i];
         }
 
         return sum;
