@@ -173,10 +173,6 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
     @Override
     public Set<Pair> findSums(int[] numbers, int sum) {
         Set<Pair> result = new HashSet<>();
-        int algorithm = 2;
-        //
-        switch(algorithm){
-            case 1:
             for(int i = 0; i < numbers.length; i++) {
                 for(int j=i+1; j < numbers.length; j++) {
                     if((numbers[i] + numbers[j]) == sum) {
@@ -187,25 +183,6 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
                     }
                 }
             }
-            break;
-        //
-        case 2:
-            int first = numbers.length > 0? numbers[0] : 0;
-            Set<Integer> complements = new HashSet<Integer>();
-            complements.add(sum - first);
-            for(int i=1; i < numbers.length; i++) {
-                int n = numbers[i];
-                int complement = sum - n;
-                if(complements.contains(n)) {
-                    var pair = new Pair(n, complement);
-                    if( ! result.contains(new Pair(complement, n))) {
-                        result.add(pair);
-                    }
-                }
-                complements.add(complement);
-            }
-            break;
-        }
         return result;
     }
         
