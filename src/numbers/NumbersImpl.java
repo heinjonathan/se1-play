@@ -70,7 +70,13 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
      */
     @Override
     public int sum(int[] numbers) {
-        return 0;
+        int sum = 0;
+        
+        for(int i = 0; i < numbers.length; i++) {
+            sum = sum + numbers[i];
+        }
+
+        return sum;
     }
 
     /**
