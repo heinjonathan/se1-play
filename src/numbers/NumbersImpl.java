@@ -136,13 +136,13 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
      */
     @Override
     public int findLast(int[] numbers, int x) {
-        int result = 1;
+        int result = -1;
 
         for(int i = 0; i< numbers.length; i++) {
             if(numbers[i] == x) {
                 result = i;
             }
-        } 
+        }
         return result;
     }
     /**
@@ -155,6 +155,10 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
     @Override
     public List<Integer> findAll(int[] numbers, int x) {
         List<Integer> result = new ArrayList<>();
+        for (int i=0 ; i < numbers.length; i++) {
+            if(numbers[i]== x)
+                result.add(i);
+        }
         return result;
     }
 
