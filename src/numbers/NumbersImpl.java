@@ -170,22 +170,41 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
     public Set<Pair> findSums(int[] numbers, int sum) {
         Set<Pair> result = new HashSet<>();
         int algorithm = 2;
-        
-        switch (algorithm) {
+        //
+        switch(algorithm){
             case 1:
-                for(int i = 0; i < numbers.length; i++) {
-                    for(int j = 0; j < numbers.length; i++) {
-                        if((numbers[i] + numbers[j]) = sum) {
-                            var pair = new Pair(numbers[i], numbers[j]);
-                            if(result.contains(new Pair numbers[i], numbers[j]));
-
+            for(int i = 0; i < numbers.length; i++) {
+                for(int j=i+1; j < numbers.length; j++) {
+                    if((numbers[i] + numbers[j]) == sum) {
+                        var pair = new Pair(numbers[i], numbers[j]);
+                        if( ! result.contains(new Pair(numbers[j], numbers[i]))) {
                             result.add(pair);
-                        } 
+                        }
                     }
                 }
+            }
+            break;
+        //
+        case 2:
+            int first = numbers.length > 0? numbers[0] : 0;
+            Set<Integer> complements = new HashSet<Integer>();
+            complements.add(sum - first);
+            for(int i=1; i < numbers.length; i++) {
+                int n = numbers[i];
+                int complement = sum - n;
+                if(complements.contains(n)) {
+                    var pair = new Pair(n, complement);
+                    if( ! result.contains(new Pair(complement, n))) {
+                        result.add(pair);
+                    }
+                }
+                complements.add(complement);
+            }
+            break;
         }
+        return result;
     }
-
+        
     /**
      * Aufgabe 8.) Find all combinations of numbers in numbers[] that add to sum.
      * @param numbers input
