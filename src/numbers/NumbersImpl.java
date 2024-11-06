@@ -119,9 +119,14 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
      */
     @Override
     public int findFirst(int[] numbers, int x) {
-        return 0;
-    }
 
+        for (int i = 0; i < numbers.length; i++){
+            if (numbers[i] == x) {
+                return i;
+            }
+        }
+        return -1;
+    }
     /**
      * Aufgabe 5.) Return index of last occurrence of x in numbers[]
      * or return -1 if x was not found.
@@ -131,9 +136,15 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
      */
     @Override
     public int findLast(int[] numbers, int x) {
-        return 0;
-    }
+        int result = 1;
 
+        for(int i = 0; i< numbers.length; i++) {
+            if(numbers[i] == x) {
+                result = i;
+            }
+        } 
+        return result;
+    }
     /**
      * Aufgabe 6.) Return list of all indices of number x in numbers[].
      * Return empty list, if x was not found.
@@ -158,7 +169,21 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
     @Override
     public Set<Pair> findSums(int[] numbers, int sum) {
         Set<Pair> result = new HashSet<>();
-        return result;
+        int algorithm = 2;
+        
+        switch (algorithm) {
+            case 1:
+                for(int i = 0; i < numbers.length; i++) {
+                    for(int j = 0; j < numbers.length; i++) {
+                        if((numbers[i] + numbers[j]) = sum) {
+                            var pair = new Pair(numbers[i], numbers[j]);
+                            if(result.contains(new Pair numbers[i], numbers[j]));
+
+                            result.add(pair);
+                        } 
+                    }
+                }
+        }
     }
 
     /**
