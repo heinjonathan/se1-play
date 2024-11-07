@@ -195,6 +195,23 @@ public class NumbersImpl implements Numbers, Runtime.Runnable {
     @Override
     public Set<Set<Integer>> findAllSums(int[] numbers, int sum) {
         Set<Set<Integer>> result = new HashSet<>();
+        int length = numbers.length;
+        long mask = ~(0xffffffffffffffffL << length);
+
+        Set<Integer> matchingSubset = new HashSet<Integer>();
+        for(long m=0; m <= mask; m++) {
+            matchingSubset.clear();
+            int sum2 = 0;
+            for(int i=0; i < length; i++) {
+                if(((1L << i) & m) != 0L) {
+                    matchingSubset.add(numbers[i]);
+                    sum2 += numbers[i];
+                }
+            }
+            if(sum2==sum) {
+                result.add(new HashSet<>(matchingSubset));
+            }
+        }
         return result;
     }
 
