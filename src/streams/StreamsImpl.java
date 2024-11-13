@@ -106,10 +106,7 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
     @Override
     public List<Integer> tenSortedEvenRandomNumbers() {
         List<Integer> result = new ArrayList<>();
-
-        /*
-         * TODO: write code to implement the method
-         */
+        result = randIntStream.apply(1000).filter(i -> i%2  == 0).limit(10).sorted().toList();
         return result;
     }
 
