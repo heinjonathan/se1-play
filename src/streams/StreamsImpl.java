@@ -84,7 +84,7 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
     @Override
     public List<Integer> tenRandomNumbers() {
         List<Integer> result = new ArrayList<>();
-
+        result = randIntStream.apply(1000).limit(10).toList();
         /*
          * TODO: write code to implement the method
          */
