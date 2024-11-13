@@ -155,11 +155,12 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
      */
     @Override
     public List<String> filteredNames(List<String> names, String regex) {
-
-        /*
-         * TODO: write code to implement the method
-         */
-        return List.of();
+        
+        if(names == null || regex == null) {
+            throw new IllegalArgumentException("names or regex argument is null.");
+        }
+        Stream<String> nameStream = names.stream();
+        return nameStream.filter(word -> word.matches(regex)).toList();
     }
 
     /**
@@ -170,11 +171,14 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
      */
     @Override
     public List<String> sortedNames(List<String> names, int limit) {
-
-        /*
-         * TODO: write code to implement the method
-         */
-        return List.of();
+        if (names == null) {
+            throw new IllegalArgumentException("names argument is null.");           
+        }
+        if (limit < 0) {
+            throw new IllegalArgumentException("limit argument is negative: " + limit + ".");           
+        }
+        return names.stream().sorted().limit(limit).toList();
+        //return List.of();
     }
 
     /**
