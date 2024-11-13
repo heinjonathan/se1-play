@@ -61,8 +61,17 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
          *  - key="div3": lambda yields true when a number divides by 3
          *  - key="prime3": lambda yields true when a number is three-digit prime number
          */
-        filterFunctions.put("div3", (n) -> true );
-        filterFunctions.put("prime3", (n) -> true );
+        filterFunctions.put("div3", (n) -> n % 3 == 0);
+        filterFunctions.put("prime3",(n) -> isPrimeAndThreeDigit(n));
+    }
+    public static boolean isPrimeAndThreeDigit(int n) {
+        if (n < 100 || n > 999) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
