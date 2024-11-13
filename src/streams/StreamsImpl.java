@@ -56,22 +56,22 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
     public StreamsImpl() {
         // add first filter function for key: "even" that yields true when a number is even
         filterFunctions.put("even", (n) -> n % 2 == 0 );
-        /*
-         * TODO: add other filter functions for
-         *  - key="div3": lambda yields true when a number divides by 3
-         *  - key="prime3": lambda yields true when a number is three-digit prime number
-         */
-        filterFunctions.put("div3", (n) -> n % 3 == 0);
-        filterFunctions.put("prime3",(n) -> isPrimeAndThreeDigit(n));
+        filterFunctions.put("div3", (n) -> n > 0 && n % 3 == 0);
+        filterFunctions.put("prime3",(n) -> isPrimeAndThreeDigits(n) == true);
     }
-    public static boolean isPrimeAndThreeDigit(int n) {
-        if (n < 100 || n > 999) return false;
-        for (int i = 2; i <= Math.sqrt(n); i++) {
-            if (n % i == 0) {
-                return false;
+    public static boolean isPrimeAndThreeDigits(int number) {
+        if (number < 100 || number > 999) {
+            return false; // Not a three-digit number
+        }
+        if (number < 2) {
+            return false; // Not a prime number
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false; // Divisible by another number
             }
         }
-        return true;
+        return true; // Prime number
     }
 
     /**
@@ -133,20 +133,18 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
      */
     @Override
     public List<Integer> filteredNumbers(String filter, int limit) {
-        //
-        if(filter==null || ! filterFunctions.containsKey(filter))
+        if(filter==null || ! filterFunctions.containsKey(filter)) {
             throw new IllegalArgumentException(String.format("filter null or unknown: %s",
                 filter==null? "null" : String.format("\"%s\"", filter)));
-        //
-        // if(limit < 0)
-        //     throw new IllegalArgumentException(String.format("negative limit: %d", limit));
+        }
 
-        /*
-         * TODO: write code to implement the method
-         * use lambda expressions from {@link filterFunctions} (see {@link Streams} interface)
-         */
-        return List.of();
+        if(limit < 0){
+            throw new IllegalArgumentException(String.format("negative limit: %d", limit));
+        }
+            return randIntStream.apply(1000).filter(n -> filterFunctions.get(filter).apply(n)).limit(limit).toList();
+
     }
+
 
     /**
      * Aufgabe 5: Return sub-list from input names filtered by a regular expression.
