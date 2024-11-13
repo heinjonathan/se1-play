@@ -189,11 +189,12 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
      */
     @Override
     public List<String> sortedNamesByLength(List<String> names) {
-
-        /*
-         * TODO: write code to implement the method
-         */
-        return List.of();
+        if (names == null) {
+            throw new IllegalArgumentException("names argument is null.");           
+        }
+        return names.stream()
+                    .sorted(Comparator.comparing(String::length).thenComparing(Comparator.naturalOrder()))
+                    .toList();
     }
 
     /**
@@ -203,11 +204,12 @@ public class StreamsImpl implements Streams, Runtime.Runnable {
      */
     @Override
     public long calculateValue(List<Order> orders) {
-
-        /*
-         * TODO: write code to implement the method
-         */
-        return 0L;
+        if (orders == null) {
+            throw new IllegalArgumentException("orders argument is null.");           
+        }
+        return orders.stream()
+                     .mapToLong(order -> calculateValue(orders))
+                     .sum();
     }
 
     /**

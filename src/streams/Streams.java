@@ -76,6 +76,7 @@ public interface Streams {
         final String article;
         final long units;
         final long unitPrice;
+        public Object value;
         //
         public Order(String description, long units, long unitPrice) {
             this.article = description;
